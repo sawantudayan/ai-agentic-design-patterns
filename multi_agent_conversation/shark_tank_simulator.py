@@ -1,15 +1,30 @@
+import os
+from dotenv import load_dotenv
 import random
+import json
+
+# Load environment variables from the .env file
+load_dotenv()
+
+# Retrieve the JSON file path from the environment variable
+json_file = os.getenv('SHARK_TANK_JSON_PATH')
+
+# Check if the environment variable was loaded correctly
+if json_file:
+    print(f"Loaded JSON file path: {json_file}")
+else:
+    print("Error: SHARK_TANK_JSON_PATH environment variable not set.")
 
 
 
 class Conversable:
     def __init__(self, name, role):
         """
-            Initialize a Conversable agent (either a Pitcher or a Shark) that can communicate.
+        Initialize a Conversable agent (either a Pitcher or a Shark) that can communicate.
         
-            Args:
-                - name (str): The name of the agent.
-                - role (str): The role of the agent (e.g., "Pitcher" or "Shark").
+        Args:
+        - name (str): The name of the agent.
+        - role (str): The role of the agent (e.g., "Pitcher" or "Shark").
         """
         self.name = name
         self.role = role
@@ -18,20 +33,20 @@ class Conversable:
         
     def send_message(self, message):
         """
-            Simulates the agent sending a message.
+        Simulates the agent sending a message.
         
-            Args:
-                - message (str): The message being sent.
+        Args:
+        - message (str): The message being sent.
         """
         self.chat_history.append({"role": self.role, "message": message})
         
         
     def receive_message(self, message):
         """
-            Simulates the agent receiving a message.
+        Simulates the agent receiving a message.
         
-            Args:
-                - message (str): The message received from the other agent.
+        Args:
+        - message (str): The message received from the other agent.
         """
         self.chat_history.append({"role": "Other", "message": message})
 
@@ -44,7 +59,7 @@ class Conversable:
             
             
 class Pitcher(Conversable):
-    def __init__(self, name, revenue, growth_rate, valuation, equity_asked, scalability, conviction):
+    def __init__(self, name, revenue, company, growth_rate, valuation, equity_asked, scalability, conviction):
         """
         Initialize a Pitcher with business details.
         
@@ -59,6 +74,7 @@ class Pitcher(Conversable):
         """
         super().__init__(name, role="Pitcher")
         self.revenue = revenue
+        self.company = company
         self.growth_rate = growth_rate
         self.valuation = valuation
         self.equity_asked = equity_asked
@@ -68,7 +84,7 @@ class Pitcher(Conversable):
         
     def introduce_business(self):
         """Simulate the Pitcher's introduction of their business."""
-        message = f"Hi Sharks, I am {self.name}, the founder of my company. Our current revenue is ${self.revenue}, and we're growing at a rate of {self.growth_rate*100}% annually. " \
+        message = f"Hi Sharks, I am {self.name}, the founder of my company, {self.company}. Our current revenue is ${self.revenue}, and we're growing at a rate of {self.growth_rate*100}% annually. " \
                   f"Our valuation is ${self.valuation}, and I’m offering {self.equity_asked}% equity. The business is scalable and we're looking to expand."
         self.send_message(message)
         return message  
@@ -215,31 +231,37 @@ class SharkTankSimulation:
         
         
         
+def load_simulation_data(json_file):
+    with open(json_file, 'r') as file:
+        data = json.load(file)
+
+    # Create the Pitcher object
+    pitcher_data = data['pitcher']
+    pitcher = Pitcher(
+        name=pitcher_data['name'],
+        company=pitcher_data['company'],
+        revenue=pitcher_data['revenue'],
+        growth_rate=pitcher_data['growth_rate'],
+        valuation=pitcher_data['valuation'],
+        equity_asked=pitcher_data['equity_asked'],
+        scalability=pitcher_data['scalability'],
+        conviction=pitcher_data['conviction']
+    )
+
+    # Create the Shark objects
+    sharks = []
+    for shark_data in data['sharks']:
+        sharks.append(Shark(name=shark_data['name'], conviction_factor=shark_data['conviction_factor']))
+
+    return pitcher, sharks
+        
+        
+        
        
-# --- Example Usage ---
-
-# Define a Pitcher with business details
-pitcher = Pitcher(
-    name="Udayan",
-    revenue=1500000,
-    growth_rate=0.75,
-    valuation=7000000,
-    equity_asked=10,
-    scalability=True,
-    conviction=9
-)
-
-# Define Sharks with varying conviction factors (some might be more flexible, some more skeptical)
-sharks = [
-    Shark(name="Kevin O'Leary", conviction_factor=1),  # Very flexible
-    Shark(name="Lori Greiner", conviction_factor=0.8),  # Less flexible
-    Shark(name="Daymond John", conviction_factor=0.5),  # Highly skeptical
-    Shark(name="Barbara Corcoran", conviction_factor=1),  # Very flexible
-]
-
-
-
 # Initialize the simulation
+pitcher, sharks = load_simulation_data(json_file)
+
+# Initialize the SharkTank simulation
 simulation = SharkTankSimulation(pitcher=pitcher, sharks=sharks)
 
 # Run the simulation and display the outcome

@@ -1,0 +1,30 @@
+{
+  "pitcher": {
+    "name": "Udayan Sawant",
+    "company": "Notable.ai",
+    "revenue": 1500000,
+    "growth_rate": 0.75,
+    "valuation": 7000000,
+    "equity_asked": 10,
+    "scalability": true,
+    "conviction": 9
+  },
+  "sharks": [
+    {
+      "name": "Kevin O'Leary",
+      "conviction_factor": 1
+    },
+    {
+      "name": "Lori Greiner",
+      "conviction_factor": 0.8
+    },
+    {
+      "name": "Daymond John",
+      "conviction_factor": 0.5
+    },
+    {
+      "name": "Barbara Corcoran",
+      "conviction_factor": 1
+    }
+  ]
+}
