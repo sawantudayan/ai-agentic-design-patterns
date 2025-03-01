@@ -13,6 +13,6 @@ def get_openai_api_key():
     if not openai_api_key:
         raise ValueError("OpenAI API key not found. Make sure it's set in the .env file.")
     
-    print("API Key Loaded:", openai_api_key)
+    #print("API Key Loaded:", openai_api_key)
     
     return openai_api_key
