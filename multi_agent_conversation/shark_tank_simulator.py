@@ -84,3 +84,78 @@ class Pitcher(Conversable):
             return f"Our revenue is growing steadily, and we’re expecting to hit $2 million by the end of this year."
         else:
             return "We have a strong business plan and are confident in our growth."
+        
+        
+        
+class Shark(Conversable):
+    def __init__(self, name, conviction_factor=1):
+        """
+        Initialize a Shark with decision-making characteristics.
+        
+        Args:
+        - name (str): The name of the Shark.
+        - conviction_factor (float): A factor representing the Shark's flexibility and interest in a deal (default is 1).
+        """
+        super().__init__(name, role="Shark")
+        self.conviction_factor = conviction_factor
+        
+        
+    def ask_question(self, pitcher):
+        """Simulate the Shark asking a question to the Pitcher."""
+        questions = [
+            "What is your scalability plan?",
+            "How did you arrive at your current valuation?",
+            "What are your revenue projections for the next year?",
+            "What makes your business unique compared to competitors?"
+        ]
+        question = random.choice(questions)
+        self.send_message(question)
+        return question
+
+    def evaluate_pitcher(self, pitcher):
+        """Evaluates the Pitcher's startup based on business details and returns a decision (Offer, Counteroffer, Decline)."""
+        score = self._evaluate_pitcher(pitcher)
+        if score >= 70:
+            return "Offer", score
+        elif score >= 50:
+            return "Counteroffer", score
+        else:
+            return "Decline", score
+        
+        
+    def _evaluate_pitcher(self, pitcher):
+        """Private method that calculates the score based on various evaluation criteria."""
+        score = 0
+
+        # Factor 1: Revenue
+        if pitcher.revenue > 1_000_000:
+            score += 30
+        else:
+            score += 10
+
+        # Factor 2: Growth Rate
+        if pitcher.growth_rate > 0.5:
+            score += 20
+        else:
+            score += 5
+
+        # Factor 3: Valuation vs Revenue
+        if pitcher.valuation / pitcher.revenue < 10:
+            score += 15
+        else:
+            score -= 10
+
+        # Factor 4: Scalability
+        if pitcher.scalability:
+            score += 20
+
+        # Factor 5: Conviction
+        if pitcher.conviction >= 8:
+            score += 10
+        else:
+            score += 5
+
+        # Apply the Shark's conviction factor to their decision
+        score *= self.conviction_factor
+
+        return score
