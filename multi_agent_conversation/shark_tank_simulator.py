@@ -159,3 +159,56 @@ class Shark(Conversable):
         score *= self.conviction_factor
 
         return score
+    
+    
+    
+class SharkTankSimulation:
+    def __init__(self, pitcher, sharks):
+        """
+        Initialize the Shark Tank simulation with a pitcher and a list of sharks.
+        
+        Args:
+        - pitcher (Pitcher): The Pitcher whose business is being evaluated.
+        - sharks (list of Shark): The list of sharks evaluating the Pitcher.
+        """
+        self.pitcher = pitcher
+        self.sharks = sharks
+        
+        
+        
+    def run_simulation(self):
+        """
+        Run the Shark Tank simulation, where each Shark evaluates the Pitcher's business and makes a decision.
+        
+        Returns:
+        - str: Summary of the final decisions from the sharks.
+        """
+        print("Pitcher's Introduction to the Sharks:")
+        print(self.pitcher.introduce_business())
+
+        # Sharks ask questions
+        for shark in self.sharks:
+            print(f"\n{shark.name} asks a question:")
+            question = shark.ask_question(self.pitcher)
+            print(question)
+            response = self.pitcher.answer_question(question)
+            print(f"Pitcher responds: {response}")
+            self.pitcher.receive_message(response)
+            
+            
+        # Evaluate Pitcher's performance
+        decisions = []
+        for shark in self.sharks:
+            decision, score = shark.evaluate_pitcher(self.pitcher)
+            decisions.append(f"{shark.name} decided: {decision} (Score: {score})")
+
+        # Print out the decision results
+        for decision in decisions:
+            print(decision)
+
+        # Analyze if any offers were made
+        offers = [d for d in decisions if "Offer" in d]
+        if offers:
+            return f"Pitcher's Deal Outcome: {len(offers)} offers made!"
+        else:
+            return "Pitcher's Deal Outcome: No offers made."
