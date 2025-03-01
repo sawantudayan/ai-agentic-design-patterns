@@ -2,7 +2,7 @@
 AI Agentic Design Patterns with AutoGen
 
 
-# Usecase 1 : [Shark Tank Simulation](https://github.com/sawantudayan/ai-agentic-design-patterns/tree/feature1/multi_agent_conversation/multi_agent_conversation/shark_tank_simulator)
+# [Shark Tank Simulation](https://github.com/sawantudayan/ai-agentic-design-patterns/tree/feature1/multi_agent_conversation/multi_agent_conversation/shark_tank_simulator)
 
 This project simulates a Shark Tank-style negotiation between a **Pitcher** (entrepreneur) and a **Panel of Sharks** (investors). It dynamically handles business pitches, investor responses, and deal-making negotiations based on pre-defined evaluation criteria.
 
