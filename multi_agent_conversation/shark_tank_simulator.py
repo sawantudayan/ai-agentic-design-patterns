@@ -212,3 +212,36 @@ class SharkTankSimulation:
             return f"Pitcher's Deal Outcome: {len(offers)} offers made!"
         else:
             return "Pitcher's Deal Outcome: No offers made."
+        
+        
+        
+       
+# --- Example Usage ---
+
+# Define a Pitcher with business details
+pitcher = Pitcher(
+    name="Udayan",
+    revenue=1500000,
+    growth_rate=0.75,
+    valuation=7000000,
+    equity_asked=10,
+    scalability=True,
+    conviction=9
+)
+
+# Define Sharks with varying conviction factors (some might be more flexible, some more skeptical)
+sharks = [
+    Shark(name="Kevin O'Leary", conviction_factor=1),  # Very flexible
+    Shark(name="Lori Greiner", conviction_factor=0.8),  # Less flexible
+    Shark(name="Daymond John", conviction_factor=0.5),  # Highly skeptical
+    Shark(name="Barbara Corcoran", conviction_factor=1),  # Very flexible
+]
+
+
+
+# Initialize the simulation
+simulation = SharkTankSimulation(pitcher=pitcher, sharks=sharks)
+
+# Run the simulation and display the outcome
+outcome = simulation.run_simulation()
+print(outcome)
