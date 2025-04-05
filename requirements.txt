@@ -1,11 +1,10 @@
 # python==3.10.13
-pyautogen==0.2.25
+pyautogen==0.7.6
 chess==1.10.0
 matplotlib
 numpy
 pandas
 yfinance
 pydantic
-fastpi
 flaml
 openai
