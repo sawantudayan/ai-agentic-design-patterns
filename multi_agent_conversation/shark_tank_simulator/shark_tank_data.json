@@ -7,23 +7,28 @@
     "valuation": 7000000,
     "equity_asked": 10,
     "scalability": true,
-    "conviction": 9
+    "conviction": 9,
+    "business_summary": "Notable.ai is a cutting-edge startup revolutionizing the AI-powered solutions industry. The company has achieved $1.5 million in annual revenue, showcasing robust growth potential in a rapidly expanding sector. With a growth rate of 75% year over year, Notable.ai is on track to scale its operations and reach new markets, backed by a clear vision and innovative approach to AI technology."
   },
   "sharks": [
     {
       "name": "Kevin O'Leary",
+      "system_message": "Canadian entrepreneur, financier, and television personality who is perhaps best known as a panelist on the reality series Dragons' Den and Shark Tank.",
       "conviction_factor": 1
     },
     {
       "name": "Lori Greiner",
+      "system_message": "Entrepreneur Inventor Producer Humanitarian · Lori Greiner started with one idea and turned it into a multi-million dollar international brand.",
       "conviction_factor": 0.8
     },
     {
       "name": "Daymond John",
+      "system_message": "A pioneer in the fashion industry with more than $6 billion in product sales worldwide",
       "conviction_factor": 0.5
     },
     {
       "name": "Barbara Corcoran",
+      "system_message": "Corcoran is a motivational and inspirational speaker. She is a frequent small business and real estate contributor on every major network. Corcoran has been an investor/Shark for the past ten seasons on ABC's four-time Emmy award wining show, Shark Tank, investing in over 80 businesses to date.",
       "conviction_factor": 1
     }
   ]
