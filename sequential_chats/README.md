@@ -1,37 +1,63 @@
-# Sequential Chats & Customer Onboarding
+# Usecase 2: Sequential Chats & Customer Onboarding
 
-This notebook demonstrates the process of simulating sequential interactions between AI agents to facilitate customer
+This usecase demonstrates the process of simulating sequential interactions between AI agents to facilitate customer
 onboarding. It walks through the setup, creation of agents, tasks, and initiating the customer onboarding process.
 
-## 1. Setup
+## Setup
 
 - LLM Configuration: It sets up the configuration for the language model to use gpt-3.5-turbo.
 - Package Installation: Installs the autogen package to enable AI-driven agent interactions.
 
-## 2. Creating Agents
+## Agent Creation and Configuration
 
-The notebook defines four key agents:
+Conversable Agent Setup: Multiple conversational agents are created using the ConversableAgent class from autogen.
 
-- **Onboarding Personal Information Agent**: Collects customer name and location.
-- **Onboarding Topic Preference Agent**: Gathers customer preferences regarding news topics.
-- **Customer Engagement Agent**: Engages with the customer based on their personal and topic preferences, providing fun
-  and interactive content.
-- **Customer Proxy Agent**: Acts as the intermediary that facilitates the conversation between agents and the customer.
+- Onboarding Personal Information Agent: This agent interacts with the customer to gather their name and location. It is
+  specifically configured to ask only for personal information, with termination occurring once the data is gathered.
+- Onboarding Topic Preference Agent: This agent collects customer preferences related to news topics they are interested
+  in.
+- Customer Engagement Agent: This agent creates an engaging experience by suggesting fun content such as jokes, stories,
+  or facts based on the customer's preferences.
 
-Each agent is initialized with its role and configured with the necessary LLM settings to ensure proper conversation
-flow.
+Customer Proxy Agent: Acts as an intermediary, receiving messages from the agents and enabling the conversation flow
+with the customer.
 
-## 3. Creating Tasks
+## Task Creation and Execution
 
-Sequential tasks are defined, where agents exchange messages:
+- Sequential Task Flow: The notebook defines a series of tasks, where agents communicate in a structured manner:
+    - Personal Information Task: The personal information agent asks for the customer's name and location.
+    - Topic Preference Task: The topic preference agent queries the customer for their interests in news topics.
+    - Engagement Task: The engagement agent provides interactive content based on the customer's profile.
 
-- Task 1: The onboarding personal information agent gathers the customer’s name and location.
-- Task 2: The onboarding topic preference agent asks about the customer’s interests.
-- Task 3: The customer engagement agent suggests fun content based on the customer’s preferences.
+- Message Exchange: Tasks are defined by specifying sender-receiver pairs, messages, and conditions for summary and
+  termination.
 
-These tasks are organized into a structured flow, allowing the agents to interact with the customer and each other.
+## Sequential Chat Execution
 
-## 4. Starting the Onboarding Process
+- **Initiating Chats**: The initiate_chats function starts the sequence of conversations between the customer and the
+  agents, ensuring each agent completes its task before passing the interaction along.
+- **Summary and Cost Output**: After each conversation, a summary is generated, and the cost of the interaction is
+  printed. This allows for monitoring of both the conversation quality and resource utilization.
 
-The ```initiate_chats``` function triggers the sequence of interactions between agents and the customer. After each
-interaction, a summary and cost are printed to monitor the progress and effectiveness of the conversation.
+## Clear Structure for Each Agent's Role
+
+- Each agent is tailored to a specific part of the customer onboarding process, ensuring clarity and structure in the
+  interaction flow.
+- The agents are configured to operate autonomously, ensuring minimal human input (human_input_mode="NEVER"), but
+  flexibility for customer interactions via the customer proxy agent.
+
+## Termination Conditions
+
+Each agent has termination conditions built in. For instance, the customer engagement agent terminates the conversation
+once it has fulfilled its role, and each agent automatically terminates after completing its task.
+
+## Simple Integration and Customization
+
+- The setup allows for easy addition of new agents, tasks, and functionalities to enhance the customer onboarding
+  process.
+- Agents can be modified or extended with different system messages or tasks depending on the specific requirements of
+  the customer service or onboarding process.
+
+## Contributors
+
+Udayan Sawant - Creator and Developer
