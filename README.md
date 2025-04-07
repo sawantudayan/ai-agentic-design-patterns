@@ -1,5 +1,7 @@
 # AI Agentic Design Patterns with AutoGen
 
+-----
+
 # [Shark Tank Simulation](https://github.com/sawantudayan/ai-agentic-design-patterns/tree/feature1/multi_agent_conversation/multi_agent_conversation/shark_tank_simulator)
 
 This ```usecase``` simulates a Shark Tank-style negotiation between a **Pitcher** (entrepreneur) and a **Panel of Sharks
@@ -21,6 +23,8 @@ pre-defined evaluation criteria.
   can be read from an `.env` file to dynamically set the path for the JSON.
 - **Multiple Scenarios**: Sharks may make different decisions based on the evaluation, with various negotiation
   outcomes (offers, counteroffers, or rejection).
+
+----
 
 # [Customer Onboarding Agent](https://github.com/sawantudayan/ai-agentic-design-patterns/tree/feature2/sequential_chats)
 
@@ -44,6 +48,8 @@ onboarding. It walks through the setup, creation of agents, tasks, and initiatin
 
 **Customer Proxy Agent**: Acts as an intermediary, receiving messages from the agents and enabling the conversation flow
 with the customer.
+
+----------------------------------------------------
 
 # [Reflection Framework Use Case](https://github.com/sawantudayan/ai-agentic-design-patterns/tree/feature3/agent_reflection_framework/agent_reflection_framework)
 
@@ -109,3 +115,69 @@ review by stating their role.
   After all feedback has been gathered and reviewed, the Writer Agent can refine the content based on the aggregated
   suggestions. The task is completed when the final version of the content is approved, and the feedback loop is
   closed.
+
+------------------------
+
+# [**Conversational Chess Game**](https://github.com/sawantudayan/ai-agentic-design-patterns/tree/feature4/tools/tools)
+
+This ```use case``` demonstrates the process of simulating sequential interactions between AI agents to facilitate a
+game of chess. It walks through the setup, creation of agents, task orchestration, and initiating a collaborative chess
+game between two AI-powered players.
+
+## Features
+
+- Conversable Agent Setup : Multiple conversational agents are created using the `ConversableAgent` class from the
+  `autogen` library. These agents
+  simulate a collaborative environment where different agents interact with the chess game and each other.
+- Chess Game Management : The game is managed by the `ChessGame` class, which is responsible for tracking the state of
+  the chessboard, generating
+  legal moves, and processing moves made by the players.
+
+#### Player White Agent
+
+The Player White agent represents one of the two players in the game. It is programmed to:
+
+- Call `get_legal_moves()` to obtain a list of legal moves.
+- Call `make_move(move)` to make a move on the chessboard.
+  This agent is tasked with initiating the game and making the first move.
+
+#### Player Black Agent
+
+The Player Black agent represents the second player in the game. Similar to the white player, it:
+
+- Calls `get_legal_moves()` to obtain legal moves.
+- Calls `make_move(move)` to make a move after the white player’s turn.
+
+#### Board Proxy Agent
+
+The Board Proxy agent acts as an intermediary, ensuring that the players interact with the game state. It checks if a
+move has been made and facilitates the conversation between players by issuing auto-replies and terminating interactions
+when needed.
+
+#### Tool Registration
+
+Tools such as `get_legal_moves()` and `make_move()` are registered with the players and the board proxy using the
+`register_function` method. These tools allow the agents to interact with the chessboard and manage the game flow.
+
+#### Nested Chat Management
+
+Nested chats between the Player White and Player Black agents are registered, enabling them to interact based on the
+state of the chessboard. The agents send and receive messages in turn, orchestrated by the board proxy to ensure the
+game progresses sequentially.
+
+#### Game Initialization
+
+The game is initiated by the Player Black agent, who sends a message to Player White, signaling the start of the game.
+The agents then take turns making moves, with each move being validated and displayed on the chessboard.
+
+## Structure
+
+- **ChessGame Class**: Manages the chessboard and the moves. It tracks the state of the game, generates legal moves, and
+  processes the players' moves.
+- **ChessPlayerAgent Class**: Represents a player in the game (either white or black). These agents are configured with
+  a system message and LLM configuration to guide their behavior.
+- **BoardProxyAgent Class**: Acts as a proxy to manage interactions with the game state and ensures the conversation
+  flow between agents.
+- **ChessGameOrchestrator Class**: The orchestrator that sets up the agents, registers tools, and manages the sequence
+  of interactions in the game.
+
