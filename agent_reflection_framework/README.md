@@ -1,4 +1,4 @@
-# AI Agentic Design Patterns: Reflection & Blogpost Writing
+# Usecase 3: Reflection & Blogpost Writing
 
 This repository demonstrates the creation, configuration, and orchestration of AI agents to generate, review, and refine
 a blog post about DeepLearning.AI using a series of Assistant Agents.
